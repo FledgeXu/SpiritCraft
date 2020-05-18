@@ -22,14 +22,14 @@ displayName="Spirit Craft" #mandatory
 # A URL for the "homepage" for this mod, displayed in the mod UI
 #displayURL="http://example.com/" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
-#logoFile="examplemod.png" #optional
+logoFile="logo.png" #optional
 # A text field displayed in the mod UI
 #credits="Thanks for this example mod goes to Java" #optional
 # A text field displayed in the mod UI
-authors="FledgeXu" #optional
+authors="FledgeShiu" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-Spirit Magic.
+The world consist of the Five Elements -Metal, Wooden,  Aquatic, Igneous and Terrene. You will learn to how to find, how to use and how to produce them. The Truth behind world will be reveled by Your study.
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.spiritcraft]] #optional
