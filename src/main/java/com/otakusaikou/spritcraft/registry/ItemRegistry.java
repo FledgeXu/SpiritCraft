@@ -1,11 +1,13 @@
-package com.otakusaikou.spritcraft.registries;
+package com.otakusaikou.spritcraft.registry;
 
-import com.otakusaikou.spritcraft.groups.ModGroup;
-import com.otakusaikou.spritcraft.utils.ModConstants;
+import com.otakusaikou.spritcraft.group.ModGroup;
+import com.otakusaikou.spritcraft.util.ModConstants;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.function.Supplier;
 
 public class ItemRegistry {
     private static final Item.Properties DEFAULT_PROPERTIES = new Item.Properties().group(ModGroup.DEFAULT_GROUP);
@@ -15,4 +17,5 @@ public class ItemRegistry {
     public static final RegistryObject<Item> waterCrystal = ITEMS.register("water_crystal", () -> new Item(DEFAULT_PROPERTIES));
     public static final RegistryObject<Item> fireCrystal = ITEMS.register("fire_crystal", () -> new Item(DEFAULT_PROPERTIES));
     public static final RegistryObject<Item> earthCrystal = ITEMS.register("earth_crystal", () -> new Item(DEFAULT_PROPERTIES));
+
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "spiritcraft:block/water_crystal_ore"
+  }
+}

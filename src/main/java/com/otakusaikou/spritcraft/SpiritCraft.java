@@ -1,8 +1,8 @@
 package com.otakusaikou.spritcraft;
 
-import com.otakusaikou.spritcraft.registries.BlockRegistry;
-import com.otakusaikou.spritcraft.registries.ItemRegistry;
-import com.otakusaikou.spritcraft.utils.ModConstants;
+import com.otakusaikou.spritcraft.registry.BlockRegistry;
+import com.otakusaikou.spritcraft.registry.ItemRegistry;
+import com.otakusaikou.spritcraft.util.ModConstants;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 

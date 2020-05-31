@@ -1,7 +1,7 @@
-package com.otakusaikou.spritcraft.groups;
+package com.otakusaikou.spritcraft.group;
 
-import com.otakusaikou.spritcraft.registries.ItemRegistry;
-import com.otakusaikou.spritcraft.utils.ModConstants;
+import com.otakusaikou.spritcraft.registry.ItemRegistry;
+import com.otakusaikou.spritcraft.util.ModConstants;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
