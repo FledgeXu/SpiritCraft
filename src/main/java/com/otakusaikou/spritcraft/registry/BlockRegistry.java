@@ -14,9 +14,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.function.Supplier;
 
 public class BlockRegistry {
+    public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, ModConstants.MOD_ID);
     private static final Block.Properties DEFAULT_PROPERTIES = Block.Properties.create(Material.ROCK);
     private static final Item.Properties DEFAULT_BLOCK_ITEM_PROPERTIES = new Item.Properties().group(ModGroup.DEFAULT_GROUP);
-    public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, ModConstants.MOD_ID);
     public static final RegistryObject<SpiritCrystalOre> metalCrystalOre = registryWithItem("metal_crystal_ore", () -> new SpiritCrystalOre(DEFAULT_PROPERTIES));
     public static final RegistryObject<SpiritCrystalOre> woodenCrystalOre = registryWithItem("wooden_crystal_ore", () -> new SpiritCrystalOre(DEFAULT_PROPERTIES));
     public static final RegistryObject<SpiritCrystalOre> waterCrystalOre = registryWithItem("water_crystal_ore", () -> new SpiritCrystalOre(DEFAULT_PROPERTIES));
