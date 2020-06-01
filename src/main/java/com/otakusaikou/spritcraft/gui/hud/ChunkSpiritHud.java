@@ -5,6 +5,7 @@ import com.otakusaikou.spritcraft.spirit.Spirit;
 import com.otakusaikou.spritcraft.spirit.SpiritCal;
 import com.otakusaikou.spritcraft.spirit.SpiritLimit;
 import com.otakusaikou.spritcraft.util.ModConstants;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 
 public class ChunkSpiritHud extends HudGui {
@@ -13,8 +14,14 @@ public class ChunkSpiritHud extends HudGui {
     public static SpiritLimit spiritLimit;
     private static float[] percent = new float[]{1, 1, 1, 1, 1};
     private static int[] maxValue = new int[]{0, 0, 0, 0, 0};
+    private PlayerEntity player;
     int xOffset = (int) (width * 0.05);
     int yOffset = (int) (height * 0.05f);
+
+    public ChunkSpiritHud() {
+        super();
+        this.player = this.minecraft.player;
+    }
 
     @Override
     public void render() {
@@ -27,8 +34,10 @@ public class ChunkSpiritHud extends HudGui {
         for (int i = 0; i < 5; i++) {
             renderProgressBar(xOffset, yOffset + i * 10, 1, 8 + 5 * i, maxValue[i], percent[i]);
         }
-        for (int i = 0; i < 5; i++) {
-            this.fontRenderer.drawString(Integer.toString(maxValue[i]), xOffset + 50, yOffset + 10 * i, 0xffffff);
+        if (player.isSneaking()) {
+            for (int i = 0; i < 5; i++) {
+                this.fontRenderer.drawString(Integer.toString(maxValue[i]), xOffset + 50, yOffset + 10 * i, 0xffffff);
+            }
         }
     }
 

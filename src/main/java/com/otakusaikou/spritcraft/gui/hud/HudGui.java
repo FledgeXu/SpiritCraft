@@ -17,13 +17,6 @@ public class HudGui extends AbstractGui {
         this.fontRenderer = this.minecraft.fontRenderer;
     }
 
-    public void update(Minecraft minecraft) {
-        this.width = minecraft.getInstance().getMainWindow().getScaledWidth();
-        this.height = minecraft.getInstance().getMainWindow().getScaledHeight();
-        this.minecraft = minecraft.getInstance();
-        this.fontRenderer = this.minecraft.fontRenderer;
-    }
-
     public void render() {
     }
 }

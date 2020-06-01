@@ -19,7 +19,7 @@ public class Spiriter extends Item {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        if (!worldIn.isRemote && handIn == Hand.MAIN_HAND) {
+        if (!worldIn.isRemote && handIn == Hand.MAIN_HAND && playerIn.isCreative()) {
             Chunk chunk = (Chunk) worldIn.getChunk(playerIn.getPosition());
             LazyOptional<ISpiritChunkCapability> capability = chunk.getCapability(ModCapability.SPIRIT_CHUNK_CAPABILITY);
             capability.ifPresent((cap) -> {
