@@ -1,4 +1,4 @@
-package com.otakusaikou.spritcraft;
+package com.otakusaikou.spritcraft.item;
 
 import com.otakusaikou.spritcraft.capability.ISpiritChunkCapability;
 import com.otakusaikou.spritcraft.capability.ModCapability;

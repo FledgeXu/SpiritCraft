@@ -5,8 +5,8 @@ public class SpiritCal {
         a.setMetal(addWithLimit(a.getMetal(), b.getMetal(), c.getMetal()));
         a.setWooden(addWithLimit(a.getWooden(), b.getWooden(), c.getWooden()));
         a.setWater(addWithLimit(a.getWater(), b.getWater(), c.getWater()));
-        a.setFire(addWithLimit(a.getFire(), a.getFire(), c.getFire()));
-        a.setEarth(addWithLimit(a.getEarth(), a.getEarth(), c.getEarth()));
+        a.setFire(addWithLimit(a.getFire(), b.getFire(), c.getFire()));
+        a.setEarth(addWithLimit(a.getEarth(), b.getEarth(), c.getEarth()));
     }
 
     private static int addWithLimit(int a, int b, int c) {

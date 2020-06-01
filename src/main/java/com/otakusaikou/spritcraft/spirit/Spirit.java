@@ -10,6 +10,9 @@ public class Spirit implements INBTSerializable<CompoundNBT> {
     private int fire;
     private int earth;
 
+    public Spirit() {
+    }
+
     public Spirit(int metal, int wooden, int water, int fire, int earth) {
         this.metal = metal;
         this.wooden = wooden;
