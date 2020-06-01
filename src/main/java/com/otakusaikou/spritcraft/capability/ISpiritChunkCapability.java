@@ -12,4 +12,6 @@ public interface ISpiritChunkCapability extends INBTSerializable<CompoundNBT> {
     SpiritLimit getSpiritLimit();
 
     SpiritGrowRate getSpiritGrowRate();
+
+    void update();
 }

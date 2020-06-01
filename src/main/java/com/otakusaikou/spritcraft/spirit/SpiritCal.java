@@ -1,12 +1,16 @@
 package com.otakusaikou.spritcraft.spirit;
 
 public class SpiritCal {
-    public static void add(Spirit a, Spirit b) {
-        a.setMetal(a.getMetal() + b.getMetal());
-        a.setWooden(a.getWooden() + b.getWooden());
-        a.setWater(a.getWater() + b.getWater());
-        a.setFire(a.getFire() + a.getFire());
-        a.setEarth(a.getEarth() + a.getEarth());
+    public static void addWithLimit(Spirit a, Spirit b, Spirit c) {
+        a.setMetal(addWithLimit(a.getMetal(), b.getMetal(), c.getMetal()));
+        a.setWooden(addWithLimit(a.getWooden(), b.getWooden(), c.getWooden()));
+        a.setWater(addWithLimit(a.getWater(), b.getWater(), c.getWater()));
+        a.setFire(addWithLimit(a.getFire(), a.getFire(), c.getFire()));
+        a.setEarth(addWithLimit(a.getEarth(), a.getEarth(), c.getEarth()));
+    }
+
+    private static int addWithLimit(int a, int b, int c) {
+        return Math.min((a + b), c);
     }
 
     public static void sub(Spirit a, Spirit b) {

@@ -1,6 +1,7 @@
 package com.otakusaikou.spritcraft.capability;
 
 import com.otakusaikou.spritcraft.spirit.Spirit;
+import com.otakusaikou.spritcraft.spirit.SpiritCal;
 import com.otakusaikou.spritcraft.spirit.SpiritGrowRate;
 import com.otakusaikou.spritcraft.spirit.SpiritLimit;
 import net.minecraft.nbt.CompoundNBT;
@@ -34,6 +35,11 @@ public class SpiritChunkCapability implements ISpiritChunkCapability {
     @Override
     public SpiritGrowRate getSpiritGrowRate() {
         return spiritGrowRate;
+    }
+
+    @Override
+    public void update() {
+        SpiritCal.addWithLimit(this.spirit, this.spiritGrowRate, this.spiritLimit);
     }
 
     @Override

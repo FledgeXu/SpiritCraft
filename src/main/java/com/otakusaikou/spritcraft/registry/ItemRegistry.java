@@ -1,5 +1,6 @@
 package com.otakusaikou.spritcraft.registry;
 
+import com.otakusaikou.spritcraft.Spiriter;
 import com.otakusaikou.spritcraft.group.ModGroup;
 import com.otakusaikou.spritcraft.util.ModConstants;
 import net.minecraft.item.Item;
@@ -15,5 +16,5 @@ public class ItemRegistry {
     public static final RegistryObject<Item> waterCrystal = ITEMS.register("water_crystal", () -> new Item(DEFAULT_PROPERTIES));
     public static final RegistryObject<Item> fireCrystal = ITEMS.register("fire_crystal", () -> new Item(DEFAULT_PROPERTIES));
     public static final RegistryObject<Item> earthCrystal = ITEMS.register("earth_crystal", () -> new Item(DEFAULT_PROPERTIES));
-    public static final RegistryObject<Item> spiriter = ITEMS.register("spiriter", () -> new Item(DEFAULT_PROPERTIES));
+    public static final RegistryObject<Item> spiriter = ITEMS.register("spiriter", () -> new Spiriter(DEFAULT_PROPERTIES));
 }
