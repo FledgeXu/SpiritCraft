@@ -20,4 +20,8 @@ public class SpiritCal {
     private static int subOreGetZero(int a, int b) {
         return Math.max((a - b), 0);
     }
+
+    public static float[] division(Spirit a, Spirit b) {
+        return new float[]{a.getMetal() / (float) b.getMetal(), a.getWooden() / (float) b.getWooden(), a.getWater() / (float) b.getWater(), a.getFire() / (float) b.getFire(), a.getEarth() / (float) b.getEarth()};
+    }
 }

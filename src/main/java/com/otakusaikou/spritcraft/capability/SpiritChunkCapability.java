@@ -10,9 +10,9 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class SpiritChunkCapability implements ISpiritChunkCapability {
-    private Spirit spirit;
-    private SpiritLimit spiritLimit;
-    private SpiritGrowRate spiritGrowRate;
+    private final Spirit spirit;
+    private final SpiritLimit spiritLimit;
+    private final SpiritGrowRate spiritGrowRate;
 
     public SpiritChunkCapability(World world, ChunkPos pos) {
         Random random = new Random(world.getSeed() + pos.x * 10001921 + pos.z * 10001813);
