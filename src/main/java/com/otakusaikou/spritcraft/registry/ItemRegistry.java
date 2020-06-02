@@ -1,7 +1,7 @@
 package com.otakusaikou.spritcraft.registry;
 
-import com.otakusaikou.spritcraft.item.Spiriter;
 import com.otakusaikou.spritcraft.group.ModGroup;
+import com.otakusaikou.spritcraft.item.Spiriter;
 import com.otakusaikou.spritcraft.util.ModConstants;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;

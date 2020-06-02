@@ -1,8 +1,8 @@
 {
   "ambientocclusion": true,
   "textures": {
-    "1": "spiritcraft:block/cultivate_mark",
-    "particle": "spiritcraft:block/cultivate_mark"
+    "1": "spiritcraft:block/collective_mark",
+    "particle": "spiritcraft:block/collective_mark"
   },
   "elements": [
     {

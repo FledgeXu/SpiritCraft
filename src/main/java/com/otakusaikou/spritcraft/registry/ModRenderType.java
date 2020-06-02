@@ -11,6 +11,7 @@ public class ModRenderType {
     @SubscribeEvent
     public static void onRenderTypeSetup(FMLClientSetupEvent event) {
         RenderTypeLookup.setRenderLayer(BlockRegistry.glassJar.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(BlockRegistry.cultivateMark.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockRegistry.cultivateMarkBlock.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockRegistry.collectiveMarkBlock.get(), RenderType.getCutout());
     }
 }

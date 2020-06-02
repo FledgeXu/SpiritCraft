@@ -9,8 +9,8 @@ import net.minecraftforge.fml.network.NetworkEvent;
 import java.util.function.Supplier;
 
 public class SpiritHubNetworkPack {
-    private Spirit spirit;
-    private SpiritLimit spiritLimit;
+    private final Spirit spirit;
+    private final SpiritLimit spiritLimit;
 
     public SpiritHubNetworkPack(PacketBuffer buffer) {
         this.spirit = new Spirit();
@@ -19,17 +19,17 @@ public class SpiritHubNetworkPack {
         bufferToSpirit(buffer, spiritLimit);
     }
 
+    public SpiritHubNetworkPack(Spirit spirit, SpiritLimit spiritLimit) {
+        this.spirit = spirit;
+        this.spiritLimit = spiritLimit;
+    }
+
     private void bufferToSpirit(PacketBuffer buffer, Spirit spirit) {
         spirit.setMetal(buffer.readInt());
         spirit.setWooden(buffer.readInt());
         spirit.setWater(buffer.readInt());
         spirit.setFire(buffer.readInt());
         spirit.setEarth(buffer.readInt());
-    }
-
-    public SpiritHubNetworkPack(Spirit spirit, SpiritLimit spiritLimit) {
-        this.spirit = spirit;
-        this.spiritLimit = spiritLimit;
     }
 
     public void toBytes(PacketBuffer buf) {

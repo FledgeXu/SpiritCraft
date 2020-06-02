@@ -1,19 +1,14 @@
 package com.otakusaikou.spritcraft.tileentity;
 
-import com.otakusaikou.spritcraft.capability.ISpiritChunkCapability;
-import com.otakusaikou.spritcraft.capability.ModCapability;
 import com.otakusaikou.spritcraft.spirit.Spirit;
-import com.otakusaikou.spritcraft.spirit.SpiritCal;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraftforge.common.util.LazyOptional;
 
 public class SpiritConsumeTileEntity extends TileEntity implements ITickableTileEntity {
-    private Spirit spiritConsume;
-    private int idleTime;
-    private int counter = 0;
+    protected Spirit spiritConsume;
+    protected int idleTime;
+    private int counter;
 
     public SpiritConsumeTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
@@ -30,20 +25,15 @@ public class SpiritConsumeTileEntity extends TileEntity implements ITickableTile
         if (world.isRemote) {
             return;
         }
-        counter++;
-        if (counter <= idleTime) {
+        this.counter++;
+        if (counter <= this.idleTime) {
             return;
         }
-        Chunk chunk = (Chunk) world.getChunk(this.pos);
-        LazyOptional<ISpiritChunkCapability> spiritChunkCapability = chunk.getCapability(ModCapability.SPIRIT_CHUNK_CAPABILITY);
-        spiritChunkCapability.ifPresent((cap) -> {
-            if (SpiritCal.sub(cap.getSpirit(), this.spiritConsume)) {
-                doTick();
-            }
-        });
         counter = 0;
+        doTick();
     }
 
     public void doTick() {
+
     }
 }

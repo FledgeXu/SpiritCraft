@@ -9,14 +9,14 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 
 public class ChunkSpiritHud extends HudGui {
-    private final ResourceLocation HUD = new ResourceLocation(ModConstants.MOD_ID, "textures/gui/chunk_spirit.png");
     public static Spirit spirit;
     public static SpiritLimit spiritLimit;
     private static float[] percent = new float[]{1, 1, 1, 1, 1};
     private static int[] maxValue = new int[]{0, 0, 0, 0, 0};
-    private PlayerEntity player;
+    private final ResourceLocation HUD = new ResourceLocation(ModConstants.MOD_ID, "textures/gui/chunk_spirit.png");
     int xOffset = (int) (width * 0.05);
     int yOffset = (int) (height * 0.05f);
+    private final PlayerEntity player;
 
     public ChunkSpiritHud() {
         super();
