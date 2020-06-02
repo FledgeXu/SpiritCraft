@@ -1,5 +1,6 @@
 package com.otakusaikou.spritcraft.registry;
 
+import com.otakusaikou.spritcraft.block.CultivateMarkBlock;
 import com.otakusaikou.spritcraft.block.GlassJar;
 import com.otakusaikou.spritcraft.block.SpiritCrystalOre;
 import com.otakusaikou.spritcraft.group.ModGroup;
@@ -24,6 +25,7 @@ public class BlockRegistry {
     public static final RegistryObject<SpiritCrystalOre> fireCrystalOre = registryWithItem("fire_crystal_ore", () -> new SpiritCrystalOre(DEFAULT_PROPERTIES));
     public static final RegistryObject<SpiritCrystalOre> earthCrystalOre = registryWithItem("earth_crystal_ore", () -> new SpiritCrystalOre(DEFAULT_PROPERTIES));
     public static final RegistryObject<GlassJar> glassJar = registryWithItem("glass_jar", () -> new GlassJar(Block.Properties.create(Material.GLASS).notSolid()));
+    public static final RegistryObject<CultivateMarkBlock> cultivateMark = registryWithItem("cultivate_mark", () -> new CultivateMarkBlock(Block.Properties.create(Material.WOOD).notSolid().hardnessAndResistance(0.5f)));
 
     public static <T extends Block> RegistryObject<T> registryWithItem(String name, final Supplier<T> sup) {
         RegistryObject<T> registryObject = BLOCKS.register(name, sup);

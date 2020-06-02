@@ -13,12 +13,16 @@ public class SpiritCal {
         return Math.min((a + b), c);
     }
 
-    public static void sub(Spirit a, Spirit b) {
+    public static boolean sub(Spirit a, Spirit b) {
+        if (a.getMetal() < b.getMetal() || a.getWooden() < b.getWooden() || a.getWater() < b.getWater() || a.getFire() < b.getFire() || a.getEarth() < b.getEarth()) {
+            return false;
+        }
         a.setMetal(subOreGetZero(a.getMetal(), b.getMetal()));
         a.setWooden(subOreGetZero(a.getWooden(), b.getWooden()));
         a.setWater(subOreGetZero(a.getWater(), b.getWater()));
         a.setFire(subOreGetZero(a.getFire(), b.getFire()));
         a.setEarth(subOreGetZero(a.getEarth(), b.getEarth()));
+        return true;
     }
 
     private static int subOreGetZero(int a, int b) {

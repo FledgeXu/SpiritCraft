@@ -1,6 +1,5 @@
-package com.otakusaikou.spritcraft.event;
+package com.otakusaikou.spritcraft.registry;
 
-import com.otakusaikou.spritcraft.registry.BlockRegistry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -12,5 +11,6 @@ public class ModRenderType {
     @SubscribeEvent
     public static void onRenderTypeSetup(FMLClientSetupEvent event) {
         RenderTypeLookup.setRenderLayer(BlockRegistry.glassJar.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(BlockRegistry.cultivateMark.get(), RenderType.getCutout());
     }
 }
