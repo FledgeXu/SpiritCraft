@@ -23,8 +23,7 @@ public class CultivateMarkTileEntity extends SpiritConsumeTileEntity {
 
     @Override
     public void doTick() {
-        Chunk chunk = (Chunk) this.world.getChunk(this.pos);
-        LazyOptional<ISpiritChunkCapability> spiritChunkCapability = chunk.getCapability(ModCapability.SPIRIT_CHUNK_CAPABILITY);
+        LazyOptional<ISpiritChunkCapability> spiritChunkCapability = this.getSpiritChunkCap();
         spiritChunkCapability.ifPresent((cap) -> {
             Random random = new Random(this.world.getGameTime() * 20001);
             BlockPos pos = new BlockPos(this.pos.getX() + random.nextInt(9) - 4, this.pos.getY(), this.pos.getZ() + random.nextInt(9) - 4);

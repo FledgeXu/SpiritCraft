@@ -1,7 +1,6 @@
 package com.otakusaikou.spritcraft.tileentity;
 
 import com.otakusaikou.spritcraft.capability.ISpiritChunkCapability;
-import com.otakusaikou.spritcraft.capability.ModCapability;
 import com.otakusaikou.spritcraft.registry.TileEntityTypeRegistry;
 import com.otakusaikou.spritcraft.spirit.Spirit;
 import com.otakusaikou.spritcraft.spirit.SpiritCal;
@@ -11,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -30,8 +28,7 @@ public class CollectiveMarkTileEntity extends SpiritConsumeTileEntity {
         if (tileEntity == null) {
             return;
         }
-        Chunk chunk = (Chunk) this.world.getChunk(this.pos);
-        LazyOptional<ISpiritChunkCapability> spiritChunkCapability = chunk.getCapability(ModCapability.SPIRIT_CHUNK_CAPABILITY);
+        LazyOptional<ISpiritChunkCapability> spiritChunkCapability = getSpiritChunkCap();
         LazyOptional<IItemHandler> itemHandlerCapability = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
         itemHandlerCapability.ifPresent((cap) -> {
             spiritChunkCapability.ifPresent((spiritCap) -> {
