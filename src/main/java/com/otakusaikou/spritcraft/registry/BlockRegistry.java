@@ -2,9 +2,11 @@ package com.otakusaikou.spritcraft.registry;
 
 import com.otakusaikou.spritcraft.block.GlassJar;
 import com.otakusaikou.spritcraft.block.SpiritCrystalOre;
-import com.otakusaikou.spritcraft.block.mark.CollectiveMarkBlock;
-import com.otakusaikou.spritcraft.block.mark.CultivateMarkBlock;
+import com.otakusaikou.spritcraft.block.mark.MarkBlock;
 import com.otakusaikou.spritcraft.group.ModGroup;
+import com.otakusaikou.spritcraft.tileentity.CollectiveMarkTileEntity;
+import com.otakusaikou.spritcraft.tileentity.CultivateMarkTileEntity;
+import com.otakusaikou.spritcraft.tileentity.HuntMarkTIleEntity;
 import com.otakusaikou.spritcraft.util.ModConstants;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -26,8 +28,9 @@ public class BlockRegistry {
     public static final RegistryObject<SpiritCrystalOre> fireCrystalOre = registryWithItem("fire_crystal_ore", () -> new SpiritCrystalOre(DEFAULT_PROPERTIES));
     public static final RegistryObject<SpiritCrystalOre> earthCrystalOre = registryWithItem("earth_crystal_ore", () -> new SpiritCrystalOre(DEFAULT_PROPERTIES));
     public static final RegistryObject<GlassJar> glassJar = registryWithItem("glass_jar", () -> new GlassJar(Block.Properties.create(Material.GLASS).notSolid()));
-    public static final RegistryObject<CultivateMarkBlock> cultivateMarkBlock = registryWithItem("cultivate_mark", () -> new CultivateMarkBlock(Block.Properties.create(Material.WOOD).notSolid().hardnessAndResistance(0.5f)));
-    public static final RegistryObject<CollectiveMarkBlock> collectiveMarkBlock = registryWithItem("collective_mark", () -> new CollectiveMarkBlock(Block.Properties.create(Material.WOOD).notSolid().hardnessAndResistance(0.5f)));
+    public static final RegistryObject<MarkBlock> cultivateMarkBlock = registryWithItem("cultivate_mark", () -> new MarkBlock(Block.Properties.create(Material.WOOD).notSolid().hardnessAndResistance(0.5f), CultivateMarkTileEntity::new));
+    public static final RegistryObject<MarkBlock> collectiveMarkBlock = registryWithItem("collective_mark", () -> new MarkBlock(Block.Properties.create(Material.WOOD).notSolid().hardnessAndResistance(0.5f), CollectiveMarkTileEntity::new));
+    public static final RegistryObject<MarkBlock> huntMarkBlock = registryWithItem("hunt_mark", () -> new MarkBlock(Block.Properties.create(Material.WOOD).notSolid().hardnessAndResistance(0.5f), HuntMarkTIleEntity::new));
 
 
     public static <T extends Block> RegistryObject<T> registryWithItem(String name, final Supplier<T> sup) {

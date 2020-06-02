@@ -3,11 +3,14 @@ package com.otakusaikou.spritcraft.tileentity;
 import com.otakusaikou.spritcraft.capability.ISpiritChunkCapability;
 import com.otakusaikou.spritcraft.capability.ModCapability;
 import com.otakusaikou.spritcraft.spirit.Spirit;
+import com.otakusaikou.spritcraft.spirit.SpiritCal;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.util.LazyOptional;
+
+import java.util.function.Supplier;
 
 public class SpiritConsumeTileEntity extends TileEntity implements ITickableTileEntity {
     protected Spirit spiritConsume;
@@ -44,5 +47,14 @@ public class SpiritConsumeTileEntity extends TileEntity implements ITickableTile
     protected LazyOptional<ISpiritChunkCapability> getSpiritChunkCap() {
         Chunk chunk = (Chunk) this.world.getChunk(this.pos);
         return chunk.getCapability(ModCapability.SPIRIT_CHUNK_CAPABILITY);
+    }
+
+    protected void consumeSpiritThenDo(Supplier<Void> action) {
+        LazyOptional<ISpiritChunkCapability> spiritChunkCapabilityLazyOptional = getSpiritChunkCap();
+        spiritChunkCapabilityLazyOptional.ifPresent((cap) -> {
+            if (SpiritCal.sub(cap.getSpirit(), this.spiritConsume)) {
+                action.get();
+            }
+        });
     }
 }

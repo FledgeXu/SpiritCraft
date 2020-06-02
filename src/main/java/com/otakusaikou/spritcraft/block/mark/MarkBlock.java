@@ -1,11 +1,13 @@
 package com.otakusaikou.spritcraft.block.mark;
 
+import com.otakusaikou.spritcraft.tileentity.SpiritConsumeTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -14,9 +16,11 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.function.Supplier;
 
 public class MarkBlock extends Block {
     private static VoxelShape shape = VoxelShapes.fullCube();
+    private Supplier<SpiritConsumeTileEntity> tileEntity;
 
     static {
         VoxelShape base = Block.makeCuboidShape(0, 0, 0, 16, 1, 16);
@@ -24,8 +28,9 @@ public class MarkBlock extends Block {
     }
 
 
-    public MarkBlock(Properties properties) {
+    public MarkBlock(Properties properties, Supplier<SpiritConsumeTileEntity> tileEntity) {
         super(properties);
+        this.tileEntity = tileEntity;
     }
 
     @Override
@@ -46,5 +51,11 @@ public class MarkBlock extends Block {
     @Override
     public boolean hasTileEntity(BlockState state) {
         return true;
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+        return this.tileEntity.get();
     }
 }

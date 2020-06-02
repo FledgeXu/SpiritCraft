@@ -3,7 +3,6 @@ package com.otakusaikou.spritcraft.tileentity;
 import com.otakusaikou.spritcraft.capability.ISpiritChunkCapability;
 import com.otakusaikou.spritcraft.registry.TileEntityTypeRegistry;
 import com.otakusaikou.spritcraft.spirit.Spirit;
-import com.otakusaikou.spritcraft.spirit.SpiritCal;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
@@ -31,29 +30,28 @@ public class CollectiveMarkTileEntity extends SpiritConsumeTileEntity {
         LazyOptional<ISpiritChunkCapability> spiritChunkCapability = getSpiritChunkCap();
         LazyOptional<IItemHandler> itemHandlerCapability = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
         itemHandlerCapability.ifPresent((cap) -> {
-            spiritChunkCapability.ifPresent((spiritCap) -> {
-                if (SpiritCal.sub(spiritCap.getSpirit(), this.spiritConsume)) {
-                    BlockPos blockInit = new BlockPos(this.pos).add(-4, -4, -4);
-                    BlockPos blockEnd = new BlockPos(this.pos).add(4, 4, 4);
-                    //Get nearby ItemEntity.
-                    List<Entity> list = this.world.getEntitiesInAABBexcluding(null, new AxisAlignedBB(blockInit, blockEnd), null);
-                    for (Entity dropEntity : list) {
-                        if (dropEntity instanceof ItemEntity) {
-                            ItemEntity itemEntity = (ItemEntity) dropEntity;
-                            //Try to insert into container;
-                            for (int i = 0; i < cap.getSlots(); i++) {
-                                ItemStack stack = cap.insertItem(i, itemEntity.getItem(), false);
-                                // Clean the world's ItemEntity;
-                                if (stack.isEmpty()) {
-                                    itemEntity.remove();
-                                    break;
-                                } else {
-                                    itemEntity.setItem(stack);
-                                }
+            consumeSpiritThenDo(() -> {
+                BlockPos blockInit = new BlockPos(this.pos).add(-4, -4, -4);
+                BlockPos blockEnd = new BlockPos(this.pos).add(4, 4, 4);
+                //Get nearby ItemEntity.
+                List<Entity> list = this.world.getEntitiesInAABBexcluding(null, new AxisAlignedBB(blockInit, blockEnd), null);
+                for (Entity dropEntity : list) {
+                    if (dropEntity instanceof ItemEntity) {
+                        ItemEntity itemEntity = (ItemEntity) dropEntity;
+                        //Try to insert into container;
+                        for (int i = 0; i < cap.getSlots(); i++) {
+                            ItemStack stack = cap.insertItem(i, itemEntity.getItem(), false);
+                            // Clean the world's ItemEntity;
+                            if (stack.isEmpty()) {
+                                itemEntity.remove();
+                                break;
+                            } else {
+                                itemEntity.setItem(stack);
                             }
                         }
                     }
                 }
+                return null;
             });
         });
     }
