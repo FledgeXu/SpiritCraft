@@ -1,7 +1,8 @@
-package com.otakusaikou.spritcraft.tileentity;
+package com.otakusaikou.spritcraft.tileentity.mark;
 
 import com.otakusaikou.spritcraft.registry.TileEntityTypeRegistry;
 import com.otakusaikou.spritcraft.spirit.Spirit;
+import com.otakusaikou.spritcraft.tileentity.SpiritConsumeTileEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IGrowable;
 import net.minecraft.util.math.BlockPos;

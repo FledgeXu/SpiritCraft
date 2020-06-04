@@ -1,7 +1,8 @@
-package com.otakusaikou.spritcraft.tileentity;
+package com.otakusaikou.spritcraft.tileentity.mark;
 
 import com.otakusaikou.spritcraft.registry.TileEntityTypeRegistry;
 import com.otakusaikou.spritcraft.spirit.Spirit;
+import com.otakusaikou.spritcraft.tileentity.SpiritConsumeTileEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
