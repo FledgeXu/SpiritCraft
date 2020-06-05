@@ -1,5 +1,6 @@
 package com.otakusaikou.spritcraft.block.mark;
 
+import com.otakusaikou.spritcraft.block.MachineBlock;
 import com.otakusaikou.spritcraft.tileentity.SpiritConsumeTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -18,7 +19,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
-public class MarkBlock extends Block {
+public class MarkBlock extends MachineBlock {
     private static VoxelShape shape = VoxelShapes.fullCube();
     private Supplier<SpiritConsumeTileEntity> tileEntity;
 

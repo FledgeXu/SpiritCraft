@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "spiritcraft:block/spirit_furnace_side",
+    "down": "spiritcraft:block/spirit_furnace_side",
+    "up": "spiritcraft:block/spirit_furnace_up",
+    "east": "spiritcraft:block/spirit_furnace_side",
+    "west": "spiritcraft:block/spirit_furnace_side",
+    "north": "spiritcraft:block/spirit_furnace_front",
+    "south": "spiritcraft:block/spirit_furnace_side"
+  }
+}

@@ -2,6 +2,7 @@ package com.otakusaikou.spritcraft.registry;
 
 import com.otakusaikou.spritcraft.block.GlassJar;
 import com.otakusaikou.spritcraft.block.SpiritCrystalOre;
+import com.otakusaikou.spritcraft.block.SpiritFurnace;
 import com.otakusaikou.spritcraft.block.mark.MarkBlock;
 import com.otakusaikou.spritcraft.group.ModGroup;
 import com.otakusaikou.spritcraft.tileentity.mark.CollectiveMarkTileEntity;
@@ -31,7 +32,7 @@ public class BlockRegistry {
     public static final RegistryObject<MarkBlock> cultivateMarkBlock = registryWithItem("cultivate_mark", () -> new MarkBlock(Block.Properties.create(Material.WOOD).notSolid().hardnessAndResistance(0.5f), CultivateMarkTileEntity::new));
     public static final RegistryObject<MarkBlock> collectiveMarkBlock = registryWithItem("collective_mark", () -> new MarkBlock(Block.Properties.create(Material.WOOD).notSolid().hardnessAndResistance(0.5f), CollectiveMarkTileEntity::new));
     public static final RegistryObject<MarkBlock> huntMarkBlock = registryWithItem("hunt_mark", () -> new MarkBlock(Block.Properties.create(Material.WOOD).notSolid().hardnessAndResistance(0.5f), HuntMarkTIleEntity::new));
-
+    public static final RegistryObject<SpiritFurnace> spiritFurnace = registryWithItem("spirit_furnace", () -> new SpiritFurnace(DEFAULT_PROPERTIES));
 
     public static <T extends Block> RegistryObject<T> registryWithItem(String name, final Supplier<T> sup) {
         RegistryObject<T> registryObject = BLOCKS.register(name, sup);

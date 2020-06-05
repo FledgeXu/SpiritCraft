@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "spiritcraft:block/spirit_furnace"
+    },
+    "facing=south": {
+      "model": "spiritcraft:block/spirit_furnace",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "spiritcraft:block/spirit_furnace",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "spiritcraft:block/spirit_furnace",
+      "y": 90
+    },
+    "facing=up": {
+      "model": "spiritcraft:block/spirit_furnace",
+      "x": -90
+    },
+    "facing=down": {
+      "model": "spiritcraft:block/spirit_furnace",
+      "x": 90
+    }
+  }
+}
