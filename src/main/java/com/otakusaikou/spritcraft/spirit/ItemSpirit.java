@@ -1,6 +1,7 @@
 package com.otakusaikou.spritcraft.spirit;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
 import java.util.HashMap;
@@ -10,7 +11,7 @@ import java.util.Optional;
 public class ItemSpirit {
     public static Map<Item, Spirit> itemSpirit = new HashMap<>();
 
-    {
+    static {
         itemSpirit.put(Items.AIR, new Spirit(3, 10, 5, 10, 8));
         itemSpirit.put(Items.STONE, new Spirit(11, 1, 4, 10, 14));
         itemSpirit.put(Items.GRANITE, new Spirit(8, 7, 7, 11, 15));
@@ -901,5 +902,12 @@ public class ItemSpirit {
             return Optional.empty();
         }
         return Optional.of(itemSpirit.get(item));
+    }
+
+    public static Optional<Spirit> getSpiritFromItem(ItemStack itemStack) {
+        if (!itemSpirit.containsKey(itemStack.getItem())) {
+            return Optional.empty();
+        }
+        return Optional.of(itemSpirit.get(itemStack.getItem()));
     }
 }

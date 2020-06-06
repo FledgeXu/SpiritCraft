@@ -5,11 +5,10 @@ import com.otakusaikou.spritcraft.spirit.SpiritType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.TileEntity;
 
 import javax.annotation.Nullable;
 
-public class GlassJarTileEntity extends TileEntity {
+public class GlassJarTileEntity extends SyncedTileEntity {
     private static final int MAX_CAPACITY = 64;
     private SpiritType spiritType = SpiritType.none;
     private int volume = 0;
@@ -41,18 +40,6 @@ public class GlassJarTileEntity extends TileEntity {
         handleUpdateTag(pkt.getNbtCompound());
     }
 
-    @Override
-    public CompoundNBT getUpdateTag() {
-        CompoundNBT compoundNBT = super.getUpdateTag();
-        compoundNBT = serialization(compoundNBT);
-        return compoundNBT;
-    }
-
-    @Override
-    public void handleUpdateTag(CompoundNBT tag) {
-        deserialization(tag);
-    }
-
     public CompoundNBT serialization(CompoundNBT compound) {
         compound.putString("type", this.spiritType.name());
         compound.putInt("volume", this.volume);
@@ -64,15 +51,4 @@ public class GlassJarTileEntity extends TileEntity {
         this.volume = compound.getInt("volume");
     }
 
-    @Override
-    public CompoundNBT write(CompoundNBT compound) {
-        serialization(compound);
-        return super.write(compound);
-    }
-
-    @Override
-    public void read(CompoundNBT compound) {
-        deserialization(compound);
-        super.read(compound);
-    }
 }
