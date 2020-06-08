@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.IntArray;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -15,5 +16,5 @@ public class ContainerTypeRegistry {
     public static final DeferredRegister<ContainerType<?>> CONTAINERS = new DeferredRegister<>(ForgeRegistries.CONTAINERS, ModConstants.MOD_ID);
     public static RegistryObject<ContainerType<SpiritFurnaceContainer>> spiritFurnaceContainer = CONTAINERS.register("spirit_furnace",
             () -> IForgeContainerType.create((int windowId, PlayerInventory inv, PacketBuffer data)
-                    -> new SpiritFurnaceContainer(windowId, inv, Minecraft.getInstance().world, data.readBlockPos())));
+                    -> new SpiritFurnaceContainer(windowId, inv, Minecraft.getInstance().world, data.readBlockPos(), new IntArray(2))));
 }

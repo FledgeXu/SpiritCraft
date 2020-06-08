@@ -23,10 +23,9 @@ public class SpiritFurnaceScreen extends ContainerScreen<SpiritFurnaceContainer>
         int i = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize) / 2;
         blit(i, j, 0, 0, xSize, ySize);
-////        if (this.container.tileEntity.isBurning()) {
-//        int k = ((SpiritFurnaceContainer) this.container).tileEntity.getBurnLeftScaled();
-//        k = 0;
-//        this.blit(i + 80, j + 36 + 12 - k, 176, 12 - k, 14, k + 1);
-////        }
+        System.out.println(this.container);
+        int k;
+        k = (int) (13 * this.container.getProcessFactor());
+        this.blit(i + 81, j + 36 + 14 - k, 176, 12 - k, 14, k);
     }
 }

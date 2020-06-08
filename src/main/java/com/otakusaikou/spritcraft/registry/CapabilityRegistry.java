@@ -1,6 +1,7 @@
 package com.otakusaikou.spritcraft.registry;
 
 import com.otakusaikou.spritcraft.capability.ISpiritChunkCapability;
+import com.otakusaikou.spritcraft.capability.ISpiritContainerCapability;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
@@ -16,6 +17,7 @@ public class CapabilityRegistry {
     @SubscribeEvent
     public static void onCapabilityRegistry(FMLCommonSetupEvent event) {
         registryCapability(ISpiritChunkCapability.class);
+        registryCapability(ISpiritContainerCapability.class);
     }
 
     public static <T> void registryCapability(Class<T> clazz) {

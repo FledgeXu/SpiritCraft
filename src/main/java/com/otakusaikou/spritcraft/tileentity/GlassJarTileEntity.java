@@ -1,17 +1,23 @@
 package com.otakusaikou.spritcraft.tileentity;
 
+import com.otakusaikou.spritcraft.capability.ModCapability;
+import com.otakusaikou.spritcraft.capability.SpiritContainerCapability;
 import com.otakusaikou.spritcraft.registry.TileEntityTypeRegistry;
 import com.otakusaikou.spritcraft.spirit.SpiritType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.util.Direction;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class GlassJarTileEntity extends SyncedTileEntity {
+public class GlassJarTileEntity extends SyncedTileEntity implements ITickableTileEntity {
     private static final int MAX_CAPACITY = 64;
-    private SpiritType spiritType = SpiritType.none;
-    private int volume = 0;
+    private SpiritContainerCapability spiritContainer = new SpiritContainerCapability(SpiritType.none, MAX_CAPACITY, 0);
 
     public GlassJarTileEntity() {
         super(TileEntityTypeRegistry.glassJarTileEntity.get());
@@ -22,11 +28,20 @@ public class GlassJarTileEntity extends SyncedTileEntity {
     }
 
     public int getVolume() {
-        return volume;
+        return this.spiritContainer.getVolume();
     }
 
     public SpiritType getSpiritType() {
-        return spiritType;
+        return this.spiritContainer.getType();
+    }
+
+    @Nonnull
+    @Override
+    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
+        if (cap == ModCapability.SPIRIT_CONTAINER_CAPABILITY) {
+            return LazyOptional.of(() -> this.spiritContainer).cast();
+        }
+        return LazyOptional.empty();
     }
 
     @Nullable
@@ -41,14 +56,16 @@ public class GlassJarTileEntity extends SyncedTileEntity {
     }
 
     public CompoundNBT serialization(CompoundNBT compound) {
-        compound.putString("type", this.spiritType.name());
-        compound.putInt("volume", this.volume);
+        compound.put("container", this.spiritContainer.serializeNBT());
         return compound;
     }
 
     public void deserialization(CompoundNBT compound) {
-        this.spiritType = SpiritType.valueOf(compound.getString("type"));
-        this.volume = compound.getInt("volume");
+        this.spiritContainer.deserializeNBT(compound.getCompound("container"));
     }
 
+    @Override
+    public void tick() {
+        System.out.println(this.spiritContainer);
+    }
 }

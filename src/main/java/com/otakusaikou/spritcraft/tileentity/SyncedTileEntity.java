@@ -51,7 +51,7 @@ public class SyncedTileEntity extends TileEntity {
     }
 
     public CompoundNBT serialization(CompoundNBT compound) {
-        return new CompoundNBT();
+        return compound;
     }
 
     public void deserialization(CompoundNBT compound) {

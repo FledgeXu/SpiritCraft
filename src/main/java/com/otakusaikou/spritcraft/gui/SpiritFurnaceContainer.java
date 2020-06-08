@@ -10,18 +10,22 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.AbstractFurnaceTileEntity;
+import net.minecraft.util.IIntArray;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class SpiritFurnaceContainer extends Container {
     public SpiritFurnaceTileEntity tileEntity;
+    private IIntArray burningData;
 
-    public SpiritFurnaceContainer(int id, PlayerInventory playerInventory, World world, BlockPos pos) {
+    public SpiritFurnaceContainer(int id, PlayerInventory playerInventory, World world, BlockPos pos, IIntArray burningData) {
         super(ContainerTypeRegistry.spiritFurnaceContainer.get(), id);
         this.tileEntity = (SpiritFurnaceTileEntity) world.getTileEntity(pos);
         addSlot(new Slot(tileEntity.getInventory(), 0, 80, 17));
         addSlot(new Slot(tileEntity.getInventory(), 1, 80, 53));
         layoutPlayerInventorySlots(playerInventory, 8, 84);
+        this.burningData = burningData;
+        this.trackIntArray(this.burningData);
     }
 
     @Override
@@ -95,5 +99,12 @@ public class SpiritFurnaceContainer extends Container {
         // Hotbar
         topRow += 58;
         addSlotRange(inventory, 0, leftCol, topRow, 9, 18);
+    }
+
+    public float getProcessFactor() {
+        if (burningData.get(1) == 0) {
+            return 0;
+        }
+        return burningData.get(0) / (float) burningData.get(1);
     }
 }
