@@ -18,14 +18,6 @@ public class MachineBlock extends Block {
         super(properties);
     }
 
-    @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        if (placer != null) {
-            worldIn.setBlockState(pos,
-                    state.with(BlockStateProperties.FACING, getFacingFromEntity(pos, placer)), 2);
-        }
-    }
-
     public static Direction getFacingFromEntity(BlockPos clickedBlock, LivingEntity entity) {
         Vec3d vec = entity.getPositionVec();
         return Direction.getFacingFromVector(
@@ -33,6 +25,14 @@ public class MachineBlock extends Block {
                 (float) (vec.y - clickedBlock.getY()),
                 (float) (vec.z - clickedBlock.getZ())
         );
+    }
+
+    @Override
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        if (placer != null) {
+            worldIn.setBlockState(pos,
+                    state.with(BlockStateProperties.FACING, getFacingFromEntity(pos, placer)), 2);
+        }
     }
 
     @Override

@@ -16,7 +16,6 @@ import java.util.function.Supplier;
 
 public class GlassJar extends Block {
     private static VoxelShape shape = VoxelShapes.fullCube();
-    private Supplier<SpiritConsumeTileEntity> tileEntity;
 
     static {
         VoxelShape base = Block.makeCuboidShape(3, 1, 12, 13, 12, 13);
@@ -28,6 +27,8 @@ public class GlassJar extends Block {
         VoxelShape base6 = Block.makeCuboidShape(3, 13, 3, 13, 15, 13);
         shape = VoxelShapes.or(base, base1, base2, base3, base4, base5, base6);
     }
+
+    private Supplier<SpiritConsumeTileEntity> tileEntity;
 
     public GlassJar(Properties properties) {
         super(properties);

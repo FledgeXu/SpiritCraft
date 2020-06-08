@@ -6,5 +6,5 @@ public enum SpiritType {
     wooden(),
     water(),
     fire(),
-    earth();
+    earth()
 }

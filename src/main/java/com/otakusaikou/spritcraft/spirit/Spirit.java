@@ -4,11 +4,11 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.INBTSerializable;
 
 public class Spirit implements INBTSerializable<CompoundNBT> {
-    private int metal;
-    private int wooden;
-    private int water;
-    private int fire;
-    private int earth;
+    public int metal;
+    public int wooden;
+    public int water;
+    public int fire;
+    public int earth;
 
     public Spirit() {
     }
@@ -21,45 +21,6 @@ public class Spirit implements INBTSerializable<CompoundNBT> {
         this.earth = earth;
     }
 
-    public int getMetal() {
-        return metal;
-    }
-
-    public void setMetal(int metal) {
-        this.metal = metal;
-    }
-
-    public int getWooden() {
-        return wooden;
-    }
-
-    public void setWooden(int wooden) {
-        this.wooden = wooden;
-    }
-
-    public int getWater() {
-        return water;
-    }
-
-    public void setWater(int water) {
-        this.water = water;
-    }
-
-    public int getFire() {
-        return fire;
-    }
-
-    public void setFire(int fire) {
-        this.fire = fire;
-    }
-
-    public int getEarth() {
-        return earth;
-    }
-
-    public void setEarth(int earth) {
-        this.earth = earth;
-    }
 
     @Override
     public CompoundNBT serializeNBT() {

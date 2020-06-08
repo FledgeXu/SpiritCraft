@@ -2,7 +2,7 @@ package com.otakusaikou.spritcraft.gui.hud;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.otakusaikou.spritcraft.spirit.Spirit;
-import com.otakusaikou.spritcraft.spirit.SpiritCal;
+import com.otakusaikou.spritcraft.spirit.SpiritHelper;
 import com.otakusaikou.spritcraft.spirit.SpiritLimit;
 import com.otakusaikou.spritcraft.util.ModConstants;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,9 +14,9 @@ public class ChunkSpiritHud extends HudGui {
     private static float[] percent = new float[]{1, 1, 1, 1, 1};
     private static int[] maxValue = new int[]{0, 0, 0, 0, 0};
     private final ResourceLocation HUD = new ResourceLocation(ModConstants.MOD_ID, "textures/gui/chunk_spirit.png");
+    private final PlayerEntity player;
     int xOffset = (int) (width * 0.05);
     int yOffset = (int) (height * 0.05f);
-    private final PlayerEntity player;
 
     public ChunkSpiritHud() {
         super();
@@ -26,8 +26,8 @@ public class ChunkSpiritHud extends HudGui {
     @Override
     public void render() {
         if (spirit != null && spiritLimit != null) {
-            percent = SpiritCal.division(spirit, spiritLimit);
-            maxValue = new int[]{spiritLimit.getMetal(), spiritLimit.getWooden(), spiritLimit.getWater(), spiritLimit.getFire(), spiritLimit.getEarth()};
+            percent = SpiritHelper.division(spirit, spiritLimit);
+            maxValue = new int[]{spiritLimit.metal, spiritLimit.wooden, spiritLimit.water, spiritLimit.fire, spiritLimit.earth};
         }
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.minecraft.getTextureManager().bindTexture(HUD);

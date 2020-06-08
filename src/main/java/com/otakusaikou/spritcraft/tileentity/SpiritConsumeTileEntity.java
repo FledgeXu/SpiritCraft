@@ -3,7 +3,7 @@ package com.otakusaikou.spritcraft.tileentity;
 import com.otakusaikou.spritcraft.capability.ISpiritChunkCapability;
 import com.otakusaikou.spritcraft.capability.ModCapability;
 import com.otakusaikou.spritcraft.spirit.Spirit;
-import com.otakusaikou.spritcraft.spirit.SpiritCal;
+import com.otakusaikou.spritcraft.spirit.SpiritHelper;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -52,7 +52,7 @@ public class SpiritConsumeTileEntity extends TileEntity implements ITickableTile
     protected void consumeSpiritThenDo(Supplier<Void> action) {
         LazyOptional<ISpiritChunkCapability> spiritChunkCapabilityLazyOptional = getSpiritChunkCap();
         spiritChunkCapabilityLazyOptional.ifPresent((cap) -> {
-            if (SpiritCal.sub(cap.getSpirit(), this.spiritConsume)) {
+            if (SpiritHelper.sub(cap.getSpirit(), this.spiritConsume)) {
                 action.get();
             }
         });

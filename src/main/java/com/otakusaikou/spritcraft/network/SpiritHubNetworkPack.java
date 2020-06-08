@@ -25,11 +25,11 @@ public class SpiritHubNetworkPack {
     }
 
     private void bufferToSpirit(PacketBuffer buffer, Spirit spirit) {
-        spirit.setMetal(buffer.readInt());
-        spirit.setWooden(buffer.readInt());
-        spirit.setWater(buffer.readInt());
-        spirit.setFire(buffer.readInt());
-        spirit.setEarth(buffer.readInt());
+        spirit.metal = buffer.readInt();
+        spirit.wooden = buffer.readInt();
+        spirit.water = buffer.readInt();
+        spirit.fire = buffer.readInt();
+        spirit.earth = buffer.readInt();
     }
 
     public void toBytes(PacketBuffer buf) {
@@ -38,11 +38,11 @@ public class SpiritHubNetworkPack {
     }
 
     private void spiritToBuffer(PacketBuffer buffer, Spirit spirit) {
-        buffer.writeInt(spirit.getMetal());
-        buffer.writeInt(spirit.getWooden());
-        buffer.writeInt(spirit.getWater());
-        buffer.writeInt(spirit.getFire());
-        buffer.writeInt(spirit.getEarth());
+        buffer.writeInt(spirit.metal);
+        buffer.writeInt(spirit.wooden);
+        buffer.writeInt(spirit.water);
+        buffer.writeInt(spirit.fire);
+        buffer.writeInt(spirit.earth);
     }
 
     public void handler(Supplier<NetworkEvent.Context> ctx) {

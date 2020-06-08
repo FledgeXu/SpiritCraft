@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 public class SpiritFurnaceScreen extends ContainerScreen<SpiritFurnaceContainer> {
-    private ResourceLocation SPIRIT_SCREEN_BACKGROUND = new ResourceLocation(ModConstants.MOD_ID, "textures/gui/spirit_screen_background.png");
+    private final ResourceLocation SPIRIT_SCREEN_BACKGROUND = new ResourceLocation(ModConstants.MOD_ID, "textures/gui/spirit_screen_background.png");
 
     public SpiritFurnaceScreen(SpiritFurnaceContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
@@ -23,7 +23,6 @@ public class SpiritFurnaceScreen extends ContainerScreen<SpiritFurnaceContainer>
         int i = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize) / 2;
         blit(i, j, 0, 0, xSize, ySize);
-        System.out.println(this.container);
         int k;
         k = (int) (13 * this.container.getProcessFactor());
         this.blit(i + 81, j + 36 + 14 - k, 176, 12 - k, 14, k);

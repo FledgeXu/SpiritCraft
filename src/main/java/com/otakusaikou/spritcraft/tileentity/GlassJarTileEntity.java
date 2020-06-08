@@ -7,7 +7,6 @@ import com.otakusaikou.spritcraft.spirit.SpiritType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -15,9 +14,9 @@ import net.minecraftforge.common.util.LazyOptional;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class GlassJarTileEntity extends SyncedTileEntity implements ITickableTileEntity {
+public class GlassJarTileEntity extends SyncedTileEntity {
     private static final int MAX_CAPACITY = 64;
-    private SpiritContainerCapability spiritContainer = new SpiritContainerCapability(SpiritType.none, MAX_CAPACITY, 0);
+    private final SpiritContainerCapability spiritContainer = new SpiritContainerCapability(SpiritType.none, MAX_CAPACITY, 0);
 
     public GlassJarTileEntity() {
         super(TileEntityTypeRegistry.glassJarTileEntity.get());
@@ -64,8 +63,4 @@ public class GlassJarTileEntity extends SyncedTileEntity implements ITickableTil
         this.spiritContainer.deserializeNBT(compound.getCompound("container"));
     }
 
-    @Override
-    public void tick() {
-        System.out.println(this.spiritContainer);
-    }
 }

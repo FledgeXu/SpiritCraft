@@ -1,8 +1,8 @@
 package com.otakusaikou.spritcraft.capability;
 
 import com.otakusaikou.spritcraft.spirit.Spirit;
-import com.otakusaikou.spritcraft.spirit.SpiritCal;
 import com.otakusaikou.spritcraft.spirit.SpiritGrowRate;
+import com.otakusaikou.spritcraft.spirit.SpiritHelper;
 import com.otakusaikou.spritcraft.spirit.SpiritLimit;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.ChunkPos;
@@ -19,7 +19,7 @@ public class SpiritChunkCapability implements ISpiritChunkCapability {
         Random random = new Random(world.getSeed() + pos.x * 10001921 + pos.z * 10001813);
         this.spiritLimit = new SpiritLimit(random.nextInt(SpiritLimit.SPIRIT_MAX) + 1, random.nextInt(SpiritLimit.SPIRIT_MAX) + 1, random.nextInt(SpiritLimit.SPIRIT_MAX) + 1, random.nextInt(SpiritLimit.SPIRIT_MAX) + 1, random.nextInt(SpiritLimit.SPIRIT_MAX) + 1);
         this.spiritGrowRate = new SpiritGrowRate(random.nextInt(SpiritGrowRate.GROW_RATE) + 1, random.nextInt(SpiritGrowRate.GROW_RATE) + 1, random.nextInt(SpiritGrowRate.GROW_RATE) + 1, random.nextInt(SpiritGrowRate.GROW_RATE) + 1, random.nextInt(SpiritGrowRate.GROW_RATE) + 1);
-        this.spirit = new Spirit(random.nextInt(this.spiritLimit.getMetal()) + 1, random.nextInt(this.spiritLimit.getWooden()) + 1, random.nextInt(this.spiritLimit.getWater()) + 1, random.nextInt(this.spiritLimit.getFire()) + 1, random.nextInt(this.spiritLimit.getEarth()) + 1);
+        this.spirit = new Spirit(random.nextInt(this.spiritLimit.metal) + 1, random.nextInt(this.spiritLimit.wooden) + 1, random.nextInt(this.spiritLimit.water) + 1, random.nextInt(this.spiritLimit.fire) + 1, random.nextInt(this.spiritLimit.earth) + 1);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class SpiritChunkCapability implements ISpiritChunkCapability {
 
     @Override
     public void update() {
-        SpiritCal.addWithLimit(this.spirit, this.spiritGrowRate, this.spiritLimit);
+        SpiritHelper.addWithLimit(this.spirit, this.spiritGrowRate, this.spiritLimit);
     }
 
     @Override

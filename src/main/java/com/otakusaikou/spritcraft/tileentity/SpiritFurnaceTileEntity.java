@@ -6,7 +6,7 @@ import com.otakusaikou.spritcraft.gui.SpiritFurnaceContainer;
 import com.otakusaikou.spritcraft.registry.TileEntityTypeRegistry;
 import com.otakusaikou.spritcraft.spirit.ItemSpirit;
 import com.otakusaikou.spritcraft.spirit.Spirit;
-import com.otakusaikou.spritcraft.spirit.SpiritCal;
+import com.otakusaikou.spritcraft.spirit.SpiritHelper;
 import com.otakusaikou.spritcraft.spirit.SpiritType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -32,13 +32,14 @@ import javax.annotation.Nullable;
 
 
 public class SpiritFurnaceTileEntity extends SyncedTileEntity implements ITickableTileEntity, INamedContainerProvider {
-    private static Spirit LIMIT = new Spirit(64, 64, 64, 64, 64);
-    private Spirit container = new Spirit();
-    private Inventory inventory = new Inventory(2);
+    private static final Spirit LIMIT = new Spirit(64, 64, 64, 64, 64);
+    private static final int SPIRIT_TO_TIME_FACTOR = 2;
+    private final Spirit spiritCache = new Spirit();
+    private final Inventory inventory = new Inventory(2);
+    private final IntArray array = new IntArray(2);
     private int burnTime = -1;
     private int cookedTime = 0;
     private int totalCookTime = 0;
-    private IntArray array = new IntArray(2);
 
     public SpiritFurnaceTileEntity() {
         super(TileEntityTypeRegistry.spiritFurnaceTileEntity.get());
@@ -54,13 +55,12 @@ public class SpiritFurnaceTileEntity extends SyncedTileEntity implements ITickab
         }
         if (!world.isRemote) {
             putSpiritToContainer();
-            System.out.println(this.container);
             ItemStack itemStack = this.inventory.getStackInSlot(0);
             ItemStack fuelStack = this.inventory.getStackInSlot(1);
             totalCookTime = 0;
             if (this.isBurning() || !itemStack.isEmpty() && !fuelStack.isEmpty() && ItemSpirit.getSpiritFromItem(itemStack).isPresent()) {
                 ItemSpirit.getSpiritFromItem(itemStack).ifPresent((spirit) -> {
-                    this.totalCookTime = (spirit.getMetal() + spirit.getWooden() + spirit.getWater() + spirit.getFire() + spirit.getEarth()) * 2;
+                    this.totalCookTime = (spirit.metal + spirit.wooden + spirit.water + spirit.fire + spirit.earth) * SPIRIT_TO_TIME_FACTOR;
                 });
                 if (!this.isBurning()) {
                     this.burnTime = ForgeHooks.getBurnTime(fuelStack);
@@ -74,7 +74,7 @@ public class SpiritFurnaceTileEntity extends SyncedTileEntity implements ITickab
                     this.cookedTime++;
                     if (this.cookedTime == this.totalCookTime) {
                         this.cookedTime = 0;
-                        SpiritCal.addWithLimit(this.container, ItemSpirit.getSpiritFromItem(itemStack).get(), LIMIT);
+                        SpiritHelper.addWithLimit(this.spiritCache, ItemSpirit.getSpiritFromItem(itemStack).get(), LIMIT);
                         itemStack.shrink(1);
                         isDirty = true;
                     }
@@ -99,60 +99,21 @@ public class SpiritFurnaceTileEntity extends SyncedTileEntity implements ITickab
         LazyOptional<ISpiritContainerCapability> spiritContainerCapability = upTileEntity.getCapability(ModCapability.SPIRIT_CONTAINER_CAPABILITY);
         spiritContainerCapability.ifPresent((cap) -> {
             if (cap.getType() == SpiritType.none) {
-                if (this.container.getMetal() != 0) {
-                    cap.putType(SpiritType.metal);
-                    this.container.setMetal(cap.putVolume(this.container.getMetal()));
+                for (SpiritType type : SpiritType.values()) {
+                    if (SpiritHelper.getValueFromType(this.spiritCache, type) != 0) {
+                        cap.putType(type);
+                        SpiritHelper.putValueBaseOnType(this.spiritCache, type, cap.putVolume(SpiritHelper.getValueFromType(this.spiritCache, type)));
+                        world.notifyBlockUpdate(this.pos.up(), world.getBlockState(this.pos.up()), world.getBlockState(this.pos.up()), Constants.BlockFlags.BLOCK_UPDATE);
+                        return;
+                    }
+                }
+            }
+            for (SpiritType type : SpiritType.values()) {
+                if (cap.getType() == type && type != SpiritType.none) {
+                    SpiritHelper.putValueBaseOnType(this.spiritCache, type, cap.putVolume(SpiritHelper.getValueFromType(this.spiritCache, type)));
                     world.notifyBlockUpdate(this.pos.up(), world.getBlockState(this.pos.up()), world.getBlockState(this.pos.up()), Constants.BlockFlags.BLOCK_UPDATE);
                     return;
                 }
-                if (this.container.getWooden() != 0) {
-                    cap.putType(SpiritType.wooden);
-                    this.container.setWooden(cap.putVolume(this.container.getWooden()));
-                    world.notifyBlockUpdate(this.pos.up(), world.getBlockState(this.pos.up()), world.getBlockState(this.pos.up()), Constants.BlockFlags.BLOCK_UPDATE);
-                    return;
-                }
-                if (this.container.getWater() != 0) {
-                    cap.putType(SpiritType.water);
-                    this.container.setWater(cap.putVolume(this.container.getWater()));
-                    world.notifyBlockUpdate(this.pos.up(), world.getBlockState(this.pos.up()), world.getBlockState(this.pos.up()), Constants.BlockFlags.BLOCK_UPDATE);
-                    return;
-                }
-                if (this.container.getFire() != 0) {
-                    cap.putType(SpiritType.fire);
-                    this.container.setFire(cap.putVolume(this.container.getFire()));
-                    world.notifyBlockUpdate(this.pos.up(), world.getBlockState(this.pos.up()), world.getBlockState(this.pos.up()), Constants.BlockFlags.BLOCK_UPDATE);
-                    return;
-                }
-                if (this.container.getEarth() != 0) {
-                    cap.putType(SpiritType.earth);
-                    this.container.setEarth(cap.putVolume(this.container.getEarth()));
-                    world.notifyBlockUpdate(this.pos.up(), world.getBlockState(this.pos.up()), world.getBlockState(this.pos.up()), Constants.BlockFlags.BLOCK_UPDATE);
-                    return;
-                }
-            }
-            if (cap.getType() == SpiritType.metal) {
-                this.container.setMetal(cap.putVolume(this.container.getMetal()));
-                world.notifyBlockUpdate(this.pos.up(), world.getBlockState(this.pos.up()), world.getBlockState(this.pos.up()), Constants.BlockFlags.BLOCK_UPDATE);
-                return;
-            }
-            if (cap.getType() == SpiritType.wooden) {
-                this.container.setWooden(cap.putVolume(this.container.getWooden()));
-                world.notifyBlockUpdate(this.pos.up(), world.getBlockState(this.pos.up()), world.getBlockState(this.pos.up()), Constants.BlockFlags.BLOCK_UPDATE);
-                return;
-            }
-            if (cap.getType() == SpiritType.water) {
-                this.container.setWater(cap.putVolume(this.container.getWater()));
-                world.notifyBlockUpdate(this.pos.up(), world.getBlockState(this.pos.up()), world.getBlockState(this.pos.up()), Constants.BlockFlags.BLOCK_UPDATE);
-                return;
-            }
-            if (cap.getType() == SpiritType.fire) {
-                this.container.setFire(cap.putVolume(this.container.getFire()));
-                world.notifyBlockUpdate(this.pos.up(), world.getBlockState(this.pos.up()), world.getBlockState(this.pos.up()), Constants.BlockFlags.BLOCK_UPDATE);
-                return;
-            }
-            if (cap.getType() == SpiritType.earth) {
-                this.container.setEarth(cap.putVolume(this.container.getEarth()));
-                world.notifyBlockUpdate(this.pos.up(), world.getBlockState(this.pos.up()), world.getBlockState(this.pos.up()), Constants.BlockFlags.BLOCK_UPDATE);
             }
         });
     }
@@ -168,7 +129,7 @@ public class SpiritFurnaceTileEntity extends SyncedTileEntity implements ITickab
         compound.put("item", this.inventory.getStackInSlot(0).serializeNBT());
         compound.put("fuel", this.inventory.getStackInSlot(1).serializeNBT());
         compound.putInt("burn_time", this.burnTime);
-        compound.put("spirit", this.container.serializeNBT());
+        compound.put("spirit", this.spiritCache.serializeNBT());
         compound.putInt("cooked_time", this.cookedTime);
         return super.serialization(compound);
     }
@@ -178,7 +139,7 @@ public class SpiritFurnaceTileEntity extends SyncedTileEntity implements ITickab
         this.inventory.setInventorySlotContents(0, ItemStack.read(compound.getCompound("item")));
         this.inventory.setInventorySlotContents(1, ItemStack.read(compound.getCompound("fuel")));
         this.burnTime = compound.getInt("burn_time");
-        this.container.deserializeNBT(compound.getCompound("spirit"));
+        this.spiritCache.deserializeNBT(compound.getCompound("spirit"));
         this.cookedTime = compound.getInt("cooked_time");
         super.deserialization(compound);
     }

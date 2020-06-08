@@ -15,8 +15,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class SpiritFurnaceContainer extends Container {
+    private final IIntArray burningData;
     public SpiritFurnaceTileEntity tileEntity;
-    private IIntArray burningData;
 
     public SpiritFurnaceContainer(int id, PlayerInventory playerInventory, World world, BlockPos pos, IIntArray burningData) {
         super(ContainerTypeRegistry.spiritFurnaceContainer.get(), id);

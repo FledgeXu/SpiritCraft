@@ -21,12 +21,13 @@ import java.util.function.Supplier;
 
 public class MarkBlock extends MachineBlock {
     private static VoxelShape shape = VoxelShapes.fullCube();
-    private Supplier<SpiritConsumeTileEntity> tileEntity;
 
     static {
         VoxelShape base = Block.makeCuboidShape(0, 0, 0, 16, 1, 16);
         shape = VoxelShapes.or(base);
     }
+
+    private final Supplier<SpiritConsumeTileEntity> tileEntity;
 
 
     public MarkBlock(Properties properties, Supplier<SpiritConsumeTileEntity> tileEntity) {
